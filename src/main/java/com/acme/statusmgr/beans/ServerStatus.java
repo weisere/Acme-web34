@@ -1,15 +1,27 @@
 package com.acme.statusmgr.beans;
 
-import com.acme.servermgr.ServerManager;
+import com.acme.servermgr.ServerManagerInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * A POJO that represents Server Status and can be used to generate JSON for that status
  */
+@Component
 public class ServerStatus {
 
     private  long id;
     private String contentHeader;
     private String statusDesc = "Unknown";
+
+    //ServerManagerInterface svm = new ServerManager();
+
+    private static ServerManagerInterface svrManager;
+
+    @Autowired
+    public void setSvrManager(ServerManagerInterface svrManager){
+        this.svrManager = svrManager;
+    }
 
     /**
      * Construct a ServerStatus using info passed in for identification, and obtaining current
@@ -23,8 +35,8 @@ public class ServerStatus {
         this.id = id;
         this.contentHeader = contentHeader;
 
-        // Obtain current status of server
-        this.statusDesc = "Server is " + ServerManager.getCurrentServerStatus();
+        /* Obtain current status of server */
+        this.statusDesc = "Server is " + svrManager.getCurrentServerStatus();
     }
 
     public ServerStatus() {
