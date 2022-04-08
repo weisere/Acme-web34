@@ -1,6 +1,8 @@
 package com.acme.statusmgr;
 
 import com.acme.statusmgr.beans.ServerStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +23,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * <p>
  * http://localhost:8080/server/status?name=Noach
  */
-@RestController
+@Controller
 @RequestMapping("/server")
 public class StatusController {
 
@@ -35,8 +37,14 @@ public class StatusController {
      * @return a ServerStatus object containing the info to be returned to the requestor
      */
     @RequestMapping("/status")
-    public ServerStatus greeting(@RequestParam(value = "name", defaultValue = "Anonymous") String name) {
-        return new ServerStatus(counter.incrementAndGet(),
+    public String status(@RequestParam(value = "name", defaultValue = "Anonymous") String name, Model model) {
+        ServerStatus stat = new ServerStatus(counter.incrementAndGet(),
                 String.format(template, name));
+        // Place relevant data into Model
+        model.addAttribute("statId", stat.getId());
+        model.addAttribute("statContentHeader", stat.getContentHeader());
+        model.addAttribute("statStatusDesc", stat.getStatusDesc());
+
+        return "status"; // return desired view name
     }
 }
