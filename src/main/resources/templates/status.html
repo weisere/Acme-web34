@@ -9,7 +9,7 @@
   overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-2buq{background-color:#ffccc9;color:#fe0000;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-info{background-color:lightblue;color:#fe0000;font-size:20px;text-align:left;vertical-align:top}
 .tg .tg-m7wd{color:#3531ff;text-align:left;vertical-align:top}
 </style>
 </head>
@@ -24,17 +24,17 @@
   <thead>
   <tr>
     <th class="tg-m7wd">Status Description</th>
-    <th class="tg-2buq" th:text="${statStatusDesc} "> STUFF </th>
+    <th class="tg-info" th:text="${statStatusDesc} "> STUFF </th>
   </tr>
   </thead>
   <tbody>
   <tr>
     <td class="tg-m7wd">Request ID</td>
-    <td class="tg-2buq" th:text="${statId}"> </td>
+    <td class="tg-info" th:text="${statId}"> </td>
   </tr>
   <tr>
     <td class="tg-m7wd">Content Header Info</td>
-    <td class="tg-2buq" th:text="${statContentHeader}"></td>
+    <td class="tg-info" th:text="${statContentHeader}"></td>
   </tr>
   </tbody>
 </table>

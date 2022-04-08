@@ -1,12 +1,62 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>ACMEWEB Server Status</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <script>
+    function validateForm() {
+    let x = document.forms["formNamed"]["name"].value;
+    /* if (x == "") { */
+      if(!x || !x.trim()){
+        alert("Name must be filled out");
+         return false;
+       }
+    }
+    </script>
+
+    <style>
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #4CAF50;} /* Green */
+.button2 {background-color: #008CBA;} /* Blue */
+    </style>
 </head>
 <body>
+<!--
 <p>Obtain standard anonymous server status here <a href="/server/status">here</a></p>
-
 <p>Obtain standard named server status here <a href="/server/status?name=M Cohen">here</a></p>
+-->
+
+<fieldset>
+    <legend>Obtain status on behalf of your name</legend>
+    <form action="/server/status" id="formNamed" method="get" onsubmit="return validateForm()" target='iframe_res'>
+        <label for="name">Name:</label>
+        <input id="name" name="name" type="text" placeholder="Enter a name" required autofocus>
+        <button class="button button1" form="formNamed" type="submit">Get Status</button>
+    </form>
+</fieldset>
+
+<fieldset>
+    <legend>Obtain status anonymously</legend>
+    <form action="/server/status" id="formAnon" method="get" target='iframe_res'>
+        <button class="button button2" form="formAnon" type="submit">Get Status</button>
+    </form>
+</fieldset>
+
+<hr>
+<iframe name="iframe_res" width="600" height="200" frameborder="1" style="border:4" ></iframe>
+<hr>
+
 </body>
 </html>
