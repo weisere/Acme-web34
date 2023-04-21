@@ -2,6 +2,7 @@ package com.acme.statusmgr;
 
 import com.acme.statusmgr.beans.ServerInterface;
 import com.acme.statusmgr.beans.ServerStatus;
+import com.acme.statusmgr.beans.SystemStatuses.SystemStatusInterface;
 import com.acme.statusmgr.beans.decoratorDetails.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,4 +83,6 @@ public class StatusController {
         }
         return detailedStatus; //todo shouldn't just return null
     }
+
+
 }
