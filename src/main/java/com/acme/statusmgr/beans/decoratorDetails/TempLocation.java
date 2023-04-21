@@ -19,7 +19,7 @@ public class TempLocation extends BaseDecorator{
 
     @Override
     public String getContentHeader() {
-        return null;
+        return ss.getContentHeader();
     }
 
     @Override
