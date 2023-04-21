@@ -1,5 +1,8 @@
 package com.acme.statusmgr.beans.SystemStatuses;
-
+/**
+ * This class is a facade all the varied types of system status we make use of.
+ * This contains mock data for testing
+ */
 public class mockSystemStatus implements SystemStatusInterface{
     @Override
     public long getAvailableProcessors() {
