@@ -1,5 +1,6 @@
 package com.acme.statusmgr.beans.decoratorDetails;
 
+import com.acme.statusmgr.beans.DecoratorDetailFacade;
 import com.acme.statusmgr.beans.ServerInterface;
 /**
  * This abstract class allows for easy creation of multiple decorators
@@ -8,6 +9,7 @@ import com.acme.statusmgr.beans.ServerInterface;
  */
 public abstract class BaseDecorator implements ServerInterface {
     ServerInterface ss;
+    DecoratorDetailFacade ddf = new DecoratorDetailFacade();
 
     public BaseDecorator(ServerInterface ss){this.ss = ss;}
 
