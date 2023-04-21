@@ -23,7 +23,7 @@ public class JreVersion extends BaseDecorator {
 
     @Override
     public String getStatusDesc(){
-        return ss.getStatusDesc() + ", and the JRE version is " + Runtime.version();
+        return ss.getStatusDesc() + ", and the JRE version is " + ddf.getJreVersion();
     }
 
     @Override

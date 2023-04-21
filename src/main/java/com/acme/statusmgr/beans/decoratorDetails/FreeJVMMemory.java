@@ -25,7 +25,7 @@ public class FreeJVMMemory extends BaseDecorator{
 
     @Override
     public String getStatusDesc(){
-        return ss.getStatusDesc() + ", and there are " + Runtime.getRuntime().freeMemory() + " bytes of JVM memory free";
+        return ss.getStatusDesc() + ", and there are " + ddf.getFreeJVMMemory() + " bytes of JVM memory free";
     }
 
     @Override

@@ -24,7 +24,7 @@ public class TempLocation extends BaseDecorator{
 
     @Override
     public String getStatusDesc(){
-        return ss.getStatusDesc() + ", and the server's temp file location is " + System.getenv("TEMP");
+        return ss.getStatusDesc() + ", and the server's temp file location is " + ddf.getTempLocation();
     }
 
     @Override

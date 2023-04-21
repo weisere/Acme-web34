@@ -26,7 +26,7 @@ public class AvailableProcessors extends BaseDecorator{
 
     @Override
     public String getStatusDesc(){
-        return ss.getStatusDesc() + ", and there are " + Runtime.getRuntime().availableProcessors() + " processors available";
+        return ss.getStatusDesc() + ", and there are " + ddf.getAvailableProcessors() + " processors available";
     }
 
     @Override
