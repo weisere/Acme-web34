@@ -25,7 +25,7 @@ public class TotalJVMMemory extends BaseDecorator{
 
     @Override
     public String getStatusDesc(){
-        return ss.getStatusDesc() + ", and there is a total of "+ ddf.getTotalJVMMemory() +" bytes of JVM memory";
+        return ss.getStatusDesc() + ", and there is a total of "+ sSI.getTotalJVMMemory() +" bytes of JVM memory";
     }
 
     @Override
