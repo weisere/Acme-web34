@@ -1,11 +1,16 @@
 package com.acme.statusmgr;
 
+import com.acme.statusmgr.beans.ServerInterface;
 import com.acme.statusmgr.beans.ServerStatus;
+import com.acme.statusmgr.beans.SystemStatuses.SystemStatusInterface;
+import com.acme.statusmgr.beans.decoratorDetails.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,20 +60,51 @@ public class StatusController {
      *      * @apiNote TODO since Spring picks apart the object returned with Reflection and doesn't care what the return-object's type is, we can change the type of object we return if necessary
      */
     @RequestMapping("/status/detailed")
-    public ServerStatus getDetailedStatus(
+    public ServerInterface getDetailedStatus(
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam List<String> details) {
 
-        ServerStatus detailedStatus = null;
+        ServerInterface detailedStatus = new ServerStatus(counter.incrementAndGet(),
+                String.format(template, name));
+
 
         if (details != null) {
             Logger logger = LoggerFactory.getLogger("StatusController");
             logger.info("Details were provided: " + Arrays.toString(details.toArray()));
 
             //todo Should do something with all these details that were requested
+            for (String detail: details) {
+                switch (detail) {
+                    case "availableProcessors" -> {
+                        detailedStatus = new AvailableProcessors(detailedStatus);
+                        logger.info("Detailed status for availableProcessors created successfully.");
+                    }
+                    case "freeJVMMemory" -> {
+                        detailedStatus = new FreeJVMMemory(detailedStatus);
+                        logger.info("Detailed status for freeJVMMemory created successfully.");
+                    }
+                    case "jreVersion" -> {
+                        detailedStatus = new JreVersion(detailedStatus);
+                        logger.info("Detailed status for jreVersion created successfully.");
+                    }
+                    case "tempLocation" -> {
+                        detailedStatus = new TempLocation(detailedStatus);
+                        logger.info("Detailed status for tempLocation created successfully.");
+                    }
+                    case "totalJVMMemory" -> {
+                        detailedStatus = new TotalJVMMemory(detailedStatus);
+                        logger.info("Detailed status for totalJVMMemory created successfully.");
+                    }
+                    default -> {
+                        logger.error("Invalid details option: {}", detail);
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid details option: " + detail);
+                    }
+                }
 
-
+            }
         }
         return detailedStatus; //todo shouldn't just return null
     }
+
+
 }

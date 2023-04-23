@@ -30,10 +30,21 @@ The `name` parameter value overrides the default value of “Anonymous” and is
 {"id":2,"contentHeader":"Server Status requested by Moishe","statusDesc":"Server is up"}
 ----`
 
+You can also request specified details for available processors, free JVM memory, JRE version, temp location, and total JVM memory.
+
+A request like:
+    http://localhost:8080/server/status/detailed?name=Yankel&details=availableProcessors,freeJVMMemory,totalJVMMemory,jreVersion,tempLocation
+
+Will respond with:
+`---- [source, json]
+{"id":8,"contentHeader":"Server Status requested by Yankel","requestCost":72,"statusDesc":"Server is up, and there are 4 processors available, and there are 127268272 bytes of JVM memory free, and there is a total of 159383552 bytes of JVM memory, and the JRE version is 15.0.2+7-27, and the server's temp file location is M:\\AppData\\Local\\Temp"}
+----`
+
 **--> Syntax for URLS:**
-*    All start with /server
-*    /status  will give back status of server
-*    an optional param of 'name' specifies a requestor name to appear in response
+* All start with /server
+* /status  will give back status of server
+* /detailed?= will return specified details
+* an optional param of 'name' specifies a requestor name to appear in response
 
 **--> What you'll need**
 

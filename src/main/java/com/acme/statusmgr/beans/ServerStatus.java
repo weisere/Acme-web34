@@ -1,11 +1,12 @@
 package com.acme.statusmgr.beans;
 
 import com.acme.servermgr.ServerManager;
+import com.acme.statusmgr.beans.SystemStatuses.SystemStatusInterface;
 
 /**
  * A POJO that represents Server Status and can be returned to Spring as the result of a request.
  */
-public class ServerStatus {
+public class ServerStatus implements ServerInterface {
     private long id;                // Unique identifier of request, sequential number
     private String contentHeader;   // Some info about the request
     /**
@@ -65,5 +66,7 @@ public class ServerStatus {
     public Integer getRequestCost() {
         return requestCost;
     }
+
+
 
 }
