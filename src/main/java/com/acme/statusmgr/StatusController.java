@@ -75,13 +75,32 @@ public class StatusController {
             //todo Should do something with all these details that were requested
             for (String detail: details) {
                 switch (detail) {
-                    case "availableProcessors" -> detailedStatus = new AvailableProcessors(detailedStatus);
-                    case "freeJVMMemory" -> detailedStatus = new FreeJVMMemory(detailedStatus);
-                    case "jreVersion" -> detailedStatus = new JreVersion(detailedStatus);
-                    case "tempLocation" -> detailedStatus = new TempLocation(detailedStatus);
-                    case "totalJVMMemory" -> detailedStatus = new TotalJVMMemory(detailedStatus);
-                    default -> throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid details option: " + detail);
+                    case "availableProcessors" -> {
+                        detailedStatus = new AvailableProcessors(detailedStatus);
+                        logger.info("Detailed status for availableProcessors created successfully.");
+                    }
+                    case "freeJVMMemory" -> {
+                        detailedStatus = new FreeJVMMemory(detailedStatus);
+                        logger.info("Detailed status for freeJVMMemory created successfully.");
+                    }
+                    case "jreVersion" -> {
+                        detailedStatus = new JreVersion(detailedStatus);
+                        logger.info("Detailed status for jreVersion created successfully.");
+                    }
+                    case "tempLocation" -> {
+                        detailedStatus = new TempLocation(detailedStatus);
+                        logger.info("Detailed status for tempLocation created successfully.");
+                    }
+                    case "totalJVMMemory" -> {
+                        detailedStatus = new TotalJVMMemory(detailedStatus);
+                        logger.info("Detailed status for totalJVMMemory created successfully.");
+                    }
+                    default -> {
+                        logger.error("Invalid details option: {}", detail);
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid details option: " + detail);
+                    }
                 }
+
             }
         }
         return detailedStatus; //todo shouldn't just return null
